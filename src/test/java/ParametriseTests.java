@@ -1,5 +1,3 @@
-import com.codeborne.selenide.Condition;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -29,14 +27,12 @@ public class ParametriseTests {
         $(".repo-list").shouldHave(text(searchText));
     }
 
-
     @EnumSource(UnderlineMenuItems.class)
     @ParameterizedTest(name = "{1}")
     void githubUnderlineNavigationTest (UnderlineMenuItems underlineMenuItems) {
         open("https://github.com/selenide/selenide");
         $(underlineMenuItems.getDesc()).click();
     }
-
 
     static Stream<Arguments> githubLoginMethod() {
         return Stream.of(
@@ -57,6 +53,5 @@ public class ParametriseTests {
         $("#password").sendKeys(password);
         $(".btn-primary").click();
         $(".flash-error").shouldBe(visible);
-
     }
 }
