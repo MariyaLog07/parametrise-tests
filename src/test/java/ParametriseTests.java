@@ -1,15 +1,17 @@
+import domain.UnderlineMenuItems;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.EnumSource;
-
-import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selenide.*;
-
-import domain.UnderlineMenuItems;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
+
+import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.open;
 
 public class ParametriseTests {
 
@@ -18,6 +20,7 @@ public class ParametriseTests {
             "pytest"
     })
 
+    @DisplayName("Checking the github search field")
     @ParameterizedTest(name = "{0}")
     void githubSearchTest(String searchText) {
         open("https://github.com");
@@ -27,6 +30,7 @@ public class ParametriseTests {
         $(".repo-list").shouldHave(text(searchText));
     }
 
+    @DisplayName("Checking transitions on the navigation menu tabs")
     @EnumSource(UnderlineMenuItems.class)
     @ParameterizedTest(name = "{1}")
     void githubUnderlineNavigationTest (UnderlineMenuItems underlineMenuItems) {
@@ -45,6 +49,7 @@ public class ParametriseTests {
         );
     }
 
+    @DisplayName("checking login on github")
     @MethodSource("githubLoginMethod")
     @ParameterizedTest(name = "{2}")
     void githubLoginNegativeTest(String login, String password) {
