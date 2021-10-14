@@ -41,7 +41,7 @@ public class ParametriseTests {
     static Stream<Arguments> githubLoginMethod() {
         return Stream.of(
                 Arguments.of(
-                        "sggsdg", "111"
+                        "sgdsdg", "111"
                 ),
                 Arguments.of(
                         "ya.ru", "222"
